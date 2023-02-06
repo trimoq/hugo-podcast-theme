@@ -1,0 +1,14 @@
+<rss 
+  version="2.0" 
+      {{ partial "xmlns.partial" . }}
+  >
+  <channel>
+    {{ partial "rss_prelude.xml" . }}
+    <atom:link href="{{ printf "categories/%s/opusfeed.xml" .Data.Term | absURL}}" rel="self" type="application/rss+xml" /> 
+    {{- range .Data.Pages -}}
+      {{ if isset .Params "audiofile" }}
+        {{ partial "rss_episode.xml" (dict "ctx" . "format" "opus") }}
+      {{- end -}}
+    {{- end -}}
+  </channel>
+</rss>

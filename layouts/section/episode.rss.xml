@@ -1,0 +1,15 @@
+<rss  version="2.0"  
+xmlns:atom="http://www.w3.org/2005/Atom" 
+xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+xmlns:googleplay="http://www.google.com/schemas/play-podcasts/1.0"
+ >
+  <channel>
+    {{ partial "rss_prelude.xml" . }}
+    <atom:link href="/episode/index.xml" rel="self" type="application/rss+xml" /> 
+    {{- range .Data.Pages -}}
+      {{ if isset .Params "audiofile" }}
+        {{ partial "rss_episode.xml" (dict "ctx" . "format" "mp3") }}
+      {{- end -}}
+    {{- end -}}
+  </channel>
+</rss>
